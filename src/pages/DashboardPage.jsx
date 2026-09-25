@@ -11,7 +11,7 @@ const categories = [
 ];
 
 export default function DashboardPage() {
-  const { user, cart, addToCart, logout, buyMorePoints } = useApp();
+  const { user, cart, addToCart, logout, buyMorePoints, setPage } = useApp();
   const [activeTab, setActiveTab] = useState('grocery');
   const [showCart, setShowCart] = useState(false);
   const [toast, setToast] = useState(null);
@@ -33,22 +33,34 @@ export default function DashboardPage() {
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center">
+          <div 
+            className="flex items-center gap-3 cursor-pointer group"
+            onClick={() => setPage('home')}
+            title="Go to Home"
+          >
+            <div className="w-9 h-9 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
               <span className="text-white text-sm font-bold">⚡</span>
             </div>
-            <div className="hidden sm:block">
-              <p className="font-semibold text-gray-900 text-sm">{user?.name}</p>
+            <div>
+              <p className="font-semibold text-gray-900 text-sm group-hover:text-violet-600 transition-colors">
+                {user?.name || 'Member'}
+              </p>
               <p className="text-xs text-gray-500">{user?.email}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={() => setPage('home')}
+              className="text-xs font-semibold text-slate-600 hover:text-violet-700 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+            >
+              🏠 Home
+            </button>
             <button
               onClick={buyMorePoints}
               className="hidden sm:flex items-center gap-1 text-xs text-violet-600 hover:text-violet-700 font-medium cursor-pointer"
             >
-              + Buy More Points
+              + Buy Points
             </button>
             <div className="bg-violet-100 text-violet-700 px-3 py-1.5 rounded-full text-sm font-semibold">
               🎯 {user?.points} pts

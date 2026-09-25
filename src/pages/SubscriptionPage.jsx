@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 import { tiers } from '../data/mockData';
 
 export default function SubscriptionPage() {
-  const { user, selectTier } = useApp();
+  const { user, selectTier, setPage } = useApp();
   const [hoveredId, setHoveredId] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
 
@@ -14,7 +14,14 @@ export default function SubscriptionPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <button
+          onClick={() => setPage('home')}
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors mb-6 cursor-pointer"
+        >
+          <span>←</span> Back to Home
+        </button>
+
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
             Choose Your Plan, {user?.name?.split(' ')[0]}

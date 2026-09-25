@@ -17,7 +17,7 @@ export function AppProvider({ children }) {
   const [page, setPage] = useState(() => {
     const saved = loadState();
     if (saved?.user && saved?.selectedTier) return 'dashboard';
-    if (saved?.user) return 'subscription';
+    if (saved?.user) return 'home';
     return 'login';
   });
 
@@ -31,7 +31,7 @@ export function AppProvider({ children }) {
   const login = (name, email) => {
     const u = { name, email, points: 0 };
     setUser(u);
-    setPage('subscription');
+    setPage('home');
   };
 
   const selectTier = (tier) => {
