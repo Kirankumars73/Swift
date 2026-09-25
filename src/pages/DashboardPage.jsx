@@ -28,6 +28,34 @@ export default function DashboardPage() {
     showToast(`${item.name} added to cart`);
   };
 
+  if (!user?.isSubscribed) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+        <div className="bg-white max-w-md w-full rounded-2xl shadow-xl p-8 text-center border border-slate-200">
+          <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl">
+            🔒
+          </div>
+          <h2 className="text-2xl font-bold text-slate-900">Subscription Required</h2>
+          <p className="text-slate-500 mt-2 text-sm leading-relaxed">
+            The SubSwift marketplace is exclusive to members. Please choose a subscription plan to unlock groceries, tickets, and products.
+          </p>
+          <button
+            onClick={() => setPage('subscription')}
+            className="mt-6 w-full py-3.5 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-violet-500/25 hover:shadow-violet-500/35 transition-all cursor-pointer"
+          >
+            Choose a Subscription Plan →
+          </button>
+          <button
+            onClick={() => setPage('home')}
+            className="mt-3 block mx-auto text-xs text-slate-400 hover:text-slate-600 cursor-pointer"
+          >
+            ← Back to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}

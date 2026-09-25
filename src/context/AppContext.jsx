@@ -16,7 +16,7 @@ export function AppProvider({ children }) {
   const [cart, setCart] = useState(() => loadState()?.cart || []);
   const [page, setPage] = useState(() => {
     const saved = loadState();
-    if (saved?.user && saved?.selectedTier) return 'dashboard';
+    if (saved?.user?.isSubscribed) return 'dashboard';
     if (saved?.user) return 'home';
     return 'login';
   });
@@ -29,8 +29,10 @@ export function AppProvider({ children }) {
   }, [user, selectedTier, cart]);
 
   const login = (name, email) => {
-    const u = { name, email, points: 0 };
+    const u = { name, email, points: 0, isSubscribed: false };
     setUser(u);
+    setSelectedTier(null);
+    setCart([]);
     setPage('home');
   };
 
@@ -42,7 +44,8 @@ export function AppProvider({ children }) {
   const completePayment = () => {
     setUser((prev) => ({
       ...prev,
-      points: prev.points + selectedTier.points,
+      points: (prev?.points || 0) + selectedTier.points,
+      isSubscribed: true,
     }));
     setPage('dashboard');
   };

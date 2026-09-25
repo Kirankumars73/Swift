@@ -84,26 +84,28 @@ export default function HomePage() {
             {/* Explanation */}
             <p className="mt-6 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
               Welcome to <span className="font-semibold text-slate-900">SubSwift</span>, {user?.name?.split(' ')[0]}! 
-              Pick a monthly plan to unlock guaranteed reward points. Every point equals ₹1 INR discount, redeemable directly on fresh groceries, train journeys, flight bookings, and everyday electronics.
+              Subscribe to a monthly plan to unlock our exclusive members marketplace and earn guaranteed reward points. Every point equals ₹1 INR discount, redeemable directly on groceries, travel, and electronics.
             </p>
 
             {/* Hero CTAs */}
             <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={() => setPage('subscription')}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white font-bold text-base shadow-xl shadow-violet-500/30 hover:shadow-violet-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-10 py-4 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white font-bold text-base shadow-xl shadow-violet-500/30 hover:shadow-violet-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer flex items-center justify-center gap-2"
               >
-                <span>Choose Your Subscription Plan</span>
+                <span>Subscribe to Unlock Marketplace</span>
                 <span>→</span>
               </button>
-              
-              <button
-                onClick={() => setPage('dashboard')}
-                className="w-full sm:w-auto px-7 py-4 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-base hover:bg-slate-50 hover:border-slate-300 shadow-xs hover:shadow-sm transition-all cursor-pointer flex items-center justify-center gap-2"
-              >
-                <span>Browse Marketplace</span>
-                <span>🛒</span>
-              </button>
+
+              {user?.isSubscribed && (
+                <button
+                  onClick={() => setPage('dashboard')}
+                  className="w-full sm:w-auto px-7 py-4 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-base hover:bg-slate-50 hover:border-slate-300 shadow-xs hover:shadow-sm transition-all cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <span>Go to Marketplace</span>
+                  <span>🛒</span>
+                </button>
+              )}
             </div>
 
             {/* Quick Metrics */}
